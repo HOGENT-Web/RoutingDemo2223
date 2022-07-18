@@ -1,41 +1,33 @@
 import { useCallback } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Home, AboutModule, Contact, NotFound, Products, Product } from './pages';
 import ScrollToTop from './ScrollToTop';
 
 function App() {
-    const history = useHistory();
+  const navigate = useNavigate();
 
-    const handleGoHome = useCallback(() => {
-        history.replace('/');
-    }, [history]);
+  const handleGoHome = useCallback(() => {
+    navigate('/', { replace: true });
+  }, [navigate]);
 
-    return (
-        <>
-            <ScrollToTop />
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Redirect from="/services" to="/over/services" />
-                <Route path="/over">
-                    <AboutModule />
-                </Route>
-                <Route exact path="/products">
-                    <Products />
-                </Route>
-                <Route exact path="/products/:id">
-                    <Product />
-                </Route>
-                <Route exact path="/contact">
-                    <Contact />
-                </Route>
-                <Route path="*">
-                    <NotFound />
-                </Route>
-            </Switch>
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="services" element={<Navigate to="/over/services" replace />} />
+        <Route path="over/*" element={<AboutModule />} />
+        <Route path="products">
+          <Route index element={<Products />} />
+          <Route path=":id" element={<Product />} />
+        </Route>
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
-            <button onClick={handleGoHome}>Go home!</button>
-        </>
-    );
+      <button onClick={handleGoHome}>Go home!</button>
+    </>
+  );
 }
 
 export default App;

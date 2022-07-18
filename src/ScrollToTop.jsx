@@ -6,14 +6,14 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     try {
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
     } catch {
-        // Fallback voor oude browsers
-        window.scrollTo(0, 0);
+      // Fallback voor oude browsers
+      window.scrollTo(0, 0);
     }
   }, [pathname]);
 
