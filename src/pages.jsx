@@ -1,4 +1,4 @@
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
 import { LoremIpsum } from 'react-lorem-ipsum'
 
@@ -23,7 +23,7 @@ export const Home = () => (
   </div>
 );
 
-const About = () => (
+export const About = () => (
   <div>
     <h1>Over ons</h1>
     <LoremIpsum p={2} />
@@ -42,37 +42,26 @@ const About = () => (
   </div>
 );
 
-const Services = () => (
+export const Services = () => (
   <div>
     <h1>Our services</h1>
     <LoremIpsum p={2} />
   </div>
 );
 
-const History = () => (
+export const History = () => (
   <div>
     <h1>History</h1>
     <LoremIpsum p={2} />
   </div>
 );
 
-const Location = () => (
+export const Location = () => (
   <div>
     <h1>Location</h1>
     <LoremIpsum p={2} />
   </div>
 );
-
-export const AboutModule = () => {
-  return (
-    <Routes>
-      <Route index element={<About />} />
-      <Route path="services" element={<Services />} />
-      <Route path="history" element={<History />} />
-      <Route path="location" element={<Location />} />
-    </Routes>
-  );
-};
 
 export const Contact = () => (
   <div>
@@ -82,12 +71,12 @@ export const Contact = () => (
 );
 
 export const NotFound = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <div>
       <h1>Pagina niet gevonden</h1>
-      <p>Er is geen pagina met als url {location.pathname}, probeer iets anders.</p>
+      <p>Er is geen pagina met als url {pathname}, probeer iets anders.</p>
     </div>
   );
 };
