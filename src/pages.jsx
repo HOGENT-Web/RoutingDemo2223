@@ -119,7 +119,8 @@ export const Product = () => {
   const { id } = useParams();
   const idAsNumber = Number(id);
 
-  const [product] = products.filter((p) => p.id === idAsNumber);
+  const product = products.find((p) => p.id === idAsNumber);
+
   if (!product) {
     return (
       <div>
